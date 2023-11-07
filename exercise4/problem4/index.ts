@@ -1,4 +1,3 @@
-// Define interfaces for Circle and Rectangle
 interface Shape {
   area(): number;
 }
