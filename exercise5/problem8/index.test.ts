@@ -185,7 +185,16 @@ describe("exercise5 - problem7", () => {
     expect(fetchMock).toBeCalledTimes(0);
     const resPromise = fetchCharacterWithMovies(4);
     expect(fetchMock).toBeCalledTimes(1);
-    await resPromise;
+    await vi.runOnlyPendingTimersAsync();
+    await expect(resPromise).resolves.toStrictEqual({
+      name: character.name,
+      films: [
+        movies[0].title,
+        movies[1].title,
+        movies[2].title,
+        movies[3].title,
+      ],
+    });
     expect(fetchMock).toBeCalledTimes(1 + movies.length);
   });
 

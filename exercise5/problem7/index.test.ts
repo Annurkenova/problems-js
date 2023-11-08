@@ -142,10 +142,30 @@ describe("exercise5 - problem7", () => {
       image: pokemon.sprites.front_default,
     }));
 
-    vi.spyOn(global, "fetch").mockImplementationOnce(() => {
-      const blob = new Blob([JSON.stringify(pokemons, null, 2)], {
-        type: "application/json",
-      });
+    vi.spyOn(global, "fetch").mockImplementationOnce(async (url) => {
+      let path = "";
+
+      if (url instanceof URL) {
+        path = url.href;
+      } else if (url instanceof Request) {
+        path = url.url;
+      } else if (typeof url === "string") {
+        path = url;
+      }
+
+      let blob = new Blob();
+
+      if (path.includes(pokemons[0].name)) {
+        blob = new Blob([JSON.stringify(pokemons[0], null, 2)], {
+          type: "application/json",
+        });
+      }
+
+      if (path.includes(pokemons[1].name)) {
+        blob = new Blob([JSON.stringify(pokemons[1], null, 2)], {
+          type: "application/json",
+        });
+      }
 
       const response = new Response(blob, {
         status: 200,
