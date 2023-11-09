@@ -1,31 +1,36 @@
-async function fetchPokemons(pokemonNames: string[]) {
-  const promises = pokemonNames.map(async (name) => {
-    try {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase}`);
+interface Pokemon {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  image: string;
+}
 
-      if (response.status === 200) {
-        const data = await response.json();
-
-        return {
-          id: data.id,
-          name: data.name,
-          height: data.height,
-          weight: data.weight,
-          image: data.sprites.front_default,
-        };
-      } else {
-        throw new Error("smth went wrong"); // Ensure the error message matches the test expectations.
-      }
-    } catch (error) {
-      throw new Error("smth went wrong"); // Ensure the error message matches the test expectations.
-    }
-  });
-
+async function fetchPokemons(pokemonNames: string[]): Promise<Pokemon[]> {
   try {
-    const results = await Promise.all(promises);
-    return results;
+    const pokemonData: Pokemon[] = await Promise.all(
+      pokemonNames.map(async (name) => {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+        
+        if (!response.ok) {
+          throw new Error("smth went wrong");
+        }
+
+        const pokemon = await response.json();
+        return {
+          id: pokemon.id,
+          name: pokemon.name,
+          height: pokemon.height,
+          weight: pokemon.weight,
+          image: pokemon.sprites?.front_default || "", // Use optional chaining
+        };
+      })
+    );
+
+    return pokemonData;
   } catch (error) {
-    throw new Error("smth went wrong"); // Ensure the error message matches the test expectations.
+    console.error(error);
+    return Promise.reject(new Error("smth went wrong")); // Reject the promise with an error
   }
 }
 

@@ -1,14 +1,15 @@
-function printAsyncNumbers(n: number) {
-  let i = 1;
-  const interval = setInterval(() => {
+async function printAsyncNumbers(n: number) {
+  for (let i = 1; i <= n; i++) {
+    await delay(i * 1000);
     console.log(i);
-    i++;
-    if (i > n) {
-      clearInterval(interval);
-    }
-  }, 1000);
+  }
 }
 
-printAsyncNumbers
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+const n = 10;
+printAsyncNumbers(n);
 
 export default printAsyncNumbers;
