@@ -36,10 +36,10 @@ function getApp() {
 
   return new App(appEl, players);
 }
-
+// Бот против юзера, если правильно поняла, то должно быть ок
 function getPlayers() {
   const slytherinBot = new SlytherinBot();
-  const user = new SlytherinUser(); // Замените на нужный класс User
+  const user = new SlytherinUser();
 
   return [slytherinBot, user];
 }
