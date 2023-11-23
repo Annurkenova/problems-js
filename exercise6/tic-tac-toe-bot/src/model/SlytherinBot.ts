@@ -6,12 +6,8 @@ class SlytherinBot extends Bot {
   constructor() {
     super("Slytherin Bot", "/public/bot.jpg");
   }
-
-  // Реализуйте логику хода для SlytherinBot
   move(board: Piece[]) {
-    // Ваш код для хода SlytherinBot
-    // Возможно, вы захотите реализовать более умную логику для SlytherinBot
-    // В текущей реализации это просто пример
+    // нужнад ургая логика, бот туповат, проиграл мне на крестиках
     const emptyCells = board.reduce((acc, cell, index) => {
       if (cell === "") {
         acc.push(index);
@@ -23,7 +19,6 @@ class SlytherinBot extends Bot {
       const randomIndex = Math.floor(Math.random() * emptyCells.length);
       return emptyCells[randomIndex];
     } else {
-      // Доска полностью заполнена, бот не может сделать ход
       return -1;
     }
   }
