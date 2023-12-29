@@ -7,7 +7,7 @@ class SlytherinBot extends Bot {
     super("Slytherin Bot", "/public/bot.jpg");
   }
   move(board: Piece[]) {
-    // нужнад ургая логика, бот туповат, проиграл мне на крестиках
+    // we need different logic, the bot is stupid, he lost to me
     const emptyCells = board.reduce((acc, cell, index) => {
       if (cell === "") {
         acc.push(index);

@@ -1,3 +1,4 @@
+// User.ts
 import Player from "./Player";
 
 class User extends Player {

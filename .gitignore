@@ -134,4 +134,10 @@ dist
 # IDE
 .idea
 .vscode
+<<<<<<< HEAD
 >>>>>>> b30e4c6347463726cae2f3b2120d265d95e21ba2
+=======
+
+# students
+students.json
+>>>>>>> 49549a9aa096481ad054e29510cd6db1ae0a7c2e
